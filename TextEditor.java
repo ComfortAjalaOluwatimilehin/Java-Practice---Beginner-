@@ -16,6 +16,7 @@ public class TextEditor implements ActionListener {
 	JFrame frame;
 	JTextArea area;
 	JButton button;
+	static String default_filename = "default.txt";
 	TextEditor() {
 		frame = new JFrame();
 		area = new JTextArea();
@@ -31,7 +32,7 @@ public class TextEditor implements ActionListener {
 		frame.setLayout(null);
 		frame.setVisible(true);
 	}
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String text = area.getText();
@@ -40,6 +41,10 @@ public class TextEditor implements ActionListener {
 		System.out.println("type in the name of your text file below: ");
 		Scanner sc = new Scanner(System.in);
 		String filename  =sc.nextLine();
+		if(filename.length() == 0 || filename.indexOf(".txt") < 0) {
+			filename += default_filename;
+		}
+		System.out.println(filename);
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 			writer.write(text);
